@@ -1,0 +1,1 @@
+export const getImagesURL = (`https://api.unsplash.com/photos/random?client_id=oioatA38Q-z5uI_MqF_viJulCe94YTKC-nSNZEf_fSU&count=5`)
