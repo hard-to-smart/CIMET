@@ -18,8 +18,9 @@ const FormContainer = ({handleFetchAPI}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const {keyword, count, imageOrientation} = userInput
-    handleFetchAPI(keyword, count, imageOrientation)
+    // const {keyword, count, imageOrientation} = userInput
+    // handleFetchAPI(keyword, count, imageOrientation, selectedRandom)
+    handleFetchAPI(userInput.keyword, userInput.count, userInput.imageOrientation, selectedRandom)
   };
   return (
       <form className="bg-white p-8 rounded-lg shadow-lg flex flex-col gap-6 w-full justify-center items-center"
@@ -81,8 +82,8 @@ const FormContainer = ({handleFetchAPI}) => {
         </div>
 
         <button
-          className="bg-blue-500 text-white w-3/4  py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
-          type="submit"
+          className="bg-blue-500 text-white w-3/4  py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200 disabled:bg-slate-400"
+          type="submit" disabled={!(selectedRandom || userInput.keyword)}
         >
           Search
         </button>

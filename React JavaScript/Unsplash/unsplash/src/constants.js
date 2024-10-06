@@ -1,1 +1,4 @@
-export const getImagesURL = (`https://api.unsplash.com/photos/random?client_id=oioatA38Q-z5uI_MqF_viJulCe94YTKC-nSNZEf_fSU&count=5`)
+const apiKey = import.meta.env.VITE_API_KEY;
+console.log(apiKey)
+export const getRandomImagesURL = (`https://api.unsplash.com/photos/random?client_id=${apiKey}&count=30`)
+export const getCustomImagesURL = (`https://api.unsplash.com/search/photos?client_id=${apiKey}&per_page=30`)
