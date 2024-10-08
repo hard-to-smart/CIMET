@@ -13,10 +13,6 @@ const Carousel = ({ images }) => {
     }
   };
 
-  // useEffect(() => {
-  //   if( images && images.length > 0 ) 
-  //   setIsLoading((prev) => !prev)
-  // }, [images]);
   return (
     <div className="flex flex-row w-full relative h-screen items-center justify-center gap-4">
       <button
@@ -26,33 +22,21 @@ const Carousel = ({ images }) => {
       >
         <IoCaretBackOutline size={28} />
       </button>
-      <div className="flex flex-row w-full overflow-hidden relative">
-        <div
-          className={`inline-flex transition ease-out duration-400 gap-2`}
-          style={{
-            // transform: `translateX(-${currentIndex * 100/images.length}%)`,
-            transform: `translateX(-${currentIndex * 100}%)`,
-          }}
-        >
-         { images.map((image, index) => {
-                return (
-                  // {
-                  // isLoading ? (
-                  //     <Spinner/>
-                  //   )
-                  //   : (
-                  <img
-                    key={index}
-                    id={image.id}
-                    src={image.urls.small}
-                    alt={image.alt_description}
-                    onClick={() => console.log(index)}
-                  />
-                    // }
-                );
-              })
-            }
-        </div>
+    
+      <div className=" flex flex-row flex-wrap justify-center overflow-hidden h-[700px]">
+        {images.map((image, index) => {
+          return (
+            <div key={index} className="container inline-flex justify-center overflow-hidden w-full h-[80%] items-center objtect-cover gap-4"
+            style={{ transform: '-transitionX  '}} >
+              <img
+                id={image.id}
+                src={image.urls.small}
+                alt={image.alt_description}
+                onClick={() => console.log(index)}
+              />
+            </div>
+          );
+        })}
       </div>
       <button
         id="next"
@@ -66,3 +50,11 @@ const Carousel = ({ images }) => {
 };
 
 export default Carousel;
+
+// <img
+// key={index}
+// id={image.id}
+// src={image.urls.small}
+// alt={image.alt_description}
+// onClick={() => console.log(index)}
+// />
