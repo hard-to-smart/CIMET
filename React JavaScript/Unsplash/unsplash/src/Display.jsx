@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import FormContainer from "./components/FormContainer";
 import Carousel from "./components/Carousel";
 import axios, { all } from "axios";
-import { getCustomImagesURL, getRandomImagesURL } from "./constants";
+import { getCustomImagesURL, getRandomImagesURL } from "./constant";
 
 const Display = () => {
   const [images, setImages] = useState([]);
@@ -15,7 +15,7 @@ const Display = () => {
     if (selectedRandom) {
       try {
         const response = await axios.get(getRandomImagesURL);
-        setImages(response.data);
+        setImages([response.data[response.data], ...response.data[0]]);
       } catch (error) {
         console.log(error);
         throw new Error("Failed to fetch images");
@@ -27,9 +27,16 @@ const Display = () => {
         let url = `${getCustomImagesURL}&query=${keyword}&orientation=${imageOrientation}`;
         for (let i = 1; i <= pageCount; i++) {
           const response = await axios.get(`${url}&page=${i}`);
-          allimages = [...allimages, ...response.data.results]
+          allimages = [...allimages, ...response.data.results];
         }
-        setImages(allimages.slice(0, count));
+        const imagesToDisplay = allimages.slice(0, count);
+        if (imagesToDisplay.length > 0) {
+          imagesToDisplay.push(allimages[0]);
+
+          imagesToDisplay.unshift(allimages[count - 1]);
+        }
+
+        setImages(imagesToDisplay);
       } catch (error) {
         console.log(error);
         throw new Error("Failed to fetch images");
